@@ -1,10 +1,28 @@
-import './App.css';
+import { Signup } from "./components/Signup";
+import {Box} from "@mui/material"
 
 function App() {
   return (
-    <div className="App">
-      <h1>Hello World</h1>
-    </div>
+    <Box
+      sx={{
+        minHeight:"100vh",
+        display:"flex",
+        
+      }}
+    >
+      <Box
+            sx={{
+                minWidth:"400px",
+                maxWidth:"400px",
+                margin:"auto",
+                border:"1px solid grey",
+                padding:"20px",
+                borderRadius:"10px",
+            }}
+        >
+        <Signup/>
+      </Box>
+    </Box>
   );
 }
 
