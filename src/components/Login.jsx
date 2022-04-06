@@ -5,31 +5,26 @@ import { makeStyles } from '@mui/styles';
 
 import { useAuth } from '../contexts/AuthContext';
 
-import { useNavigate } from 'react-router-dom';
-
-
+import {useNavigate} from "react-router-dom" 
 
 
 const useStyles = makeStyles({
     formGroup:{
         marginTop:"20px",
         width:"100%"
+
     }
 }) 
-export const Signup = () => {
+export const Login= () => {
   const classes = useStyles()
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
-  const {signup} = useAuth()
+  const {login} = useAuth()
 
   const handleSubmit = () => {
-
-    if(password===confirmPassword){
-        signup(email,password)
-        navigate("/Dashboard")
-    }
+    login(email,password)
+    navigate("/dashboard")
 
   }
   return (
@@ -37,7 +32,7 @@ export const Signup = () => {
         <Typography
             variant="h2"
         >
-            Sign Up
+            Sign In
         </Typography>
         <FormGroup
             className={classes.formGroup}
@@ -60,16 +55,11 @@ export const Signup = () => {
         <FormGroup
             className={classes.formGroup}
         >
-            <TextField 
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}  
-                label="Confirm Pasword"
-            />
         </FormGroup>
         <FormGroup
             className={classes.formGroup}
         >
-            <Button variant="contained" onClick={handleSubmit}>Sign Up</Button>
+            <Button variant="contained" onClick={handleSubmit}>Login</Button>
         </FormGroup>
     </>
   )

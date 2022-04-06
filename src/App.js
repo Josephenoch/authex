@@ -2,21 +2,26 @@ import { Signup } from "./components/Signup";
 import {Box} from "@mui/material"
 import { AuthProvider } from "./contexts/AuthContext";
 
+import {Routes, Route} from "react-router-dom"
+import { Login } from "./components/Login";
+import { Dashboard } from "./components/Dashboard";
+import { ProtectedRoute } from "./ProtectedRoute";
+
 
 
 function App() {
 
 
   return (
-    <AuthProvider>
-      <Box
-        sx={{
-          minHeight:"100vh",
-          display:"flex",
-
-        }}
-      >
+      <AuthProvider>
         <Box
+          sx={{
+            minHeight:"100vh",
+            display:"flex",
+
+          }}
+        >
+          <Box
               sx={{
                   minWidth:"400px",
                   maxWidth:"400px",
@@ -24,13 +29,26 @@ function App() {
                   border:"1px solid grey",
                   padding:"20px",
                   borderRadius:"10px",
+                  display:"flex",
+                  flexDirection:"column",
+                  alignItems:"center"
               }}
-          >
-          <Signup/>
-        </Box>
+            >
+              <Routes>
+                  <Route index element={<Signup/>}/>
+                  <Route path="/login"element={<Login/>}/>
+                  <Route path="/dashboard"element={
+                    <ProtectedRoute>
+                      <Dashboard/>
+                    </ProtectedRoute>
+                  }/>
 
-      </Box>
-    </AuthProvider>
+
+              </Routes>
+          </Box>
+
+        </Box>
+      </AuthProvider>
   );
 }
 
