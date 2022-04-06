@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Typography, Button, FormGroup, TextField } from '@mui/material'
 import { makeStyles } from '@mui/styles';
+
+import { useAuth } from '../contexts/AuthContext';
+
+// import {useHis} 
 
 
 const useStyles = makeStyles({
@@ -11,6 +15,19 @@ const useStyles = makeStyles({
 }) 
 export const Signup = () => {
   const classes = useStyles()
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
+  const {currentUser,signup} = useAuth()
+
+  const handleSubmit = () => {
+
+    if(password===confirmPassword){
+        signup(email,password)
+        console.log(signup)
+    }
+
+  }
   return (
     <>  
         <Typography
@@ -21,23 +38,36 @@ export const Signup = () => {
         <FormGroup
             className={classes.formGroup}
         >
-            <TextField label="Email"/>
+            <TextField 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                label="Email"
+            />
         </FormGroup>
         <FormGroup
             className={classes.formGroup}
         >
-            <TextField label="Password"/>
+            <TextField 
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}    
+                label="Password"
+            />
         </FormGroup>
         <FormGroup
             className={classes.formGroup}
         >
-            <TextField label="Confirm Pasword"/>
+            <TextField 
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}  
+                label="Confirm Pasword"
+            />
         </FormGroup>
         <FormGroup
             className={classes.formGroup}
         >
-            <Button variant="contained">Sign Up</Button>
+            <Button variant="contained" onClick={handleSubmit}>Sign Up</Button>
         </FormGroup>
+        <h2>{currentUser?.email}</h2>
     </>
   )
 }

@@ -1,16 +1,14 @@
-// import { createContext, useState } from "react";
-// import { Signup } from "./components/Signup";
+import { Signup } from "./components/Signup";
 import {Box} from "@mui/material"
-import { BoxComponent } from "./components/BoxComponent"
-import { ReadingTheme } from "./components/ReadingTheme";
-import { ThemeProvider } from "./ThemeContext";
+import { AuthProvider } from "./contexts/AuthContext";
+
 
 
 function App() {
 
 
   return (
-    <ThemeProvider>
+    <AuthProvider>
       <Box
         sx={{
           minHeight:"100vh",
@@ -18,7 +16,7 @@ function App() {
 
         }}
       >
-        {/* <Box
+        <Box
               sx={{
                   minWidth:"400px",
                   maxWidth:"400px",
@@ -29,12 +27,10 @@ function App() {
               }}
           >
           <Signup/>
-        </Box> */}
-      <BoxComponent/>
-      <ReadingTheme/>
+        </Box>
 
       </Box>
-    </ThemeProvider>
+    </AuthProvider>
   );
 }
 
