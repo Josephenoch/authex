@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { Typography, Button, FormGroup, TextField } from '@mui/material'
+import { Typography, Button, FormGroup, TextField, Alert } from '@mui/material'
 import { makeStyles } from '@mui/styles';
 
 import { useAuth } from '../contexts/AuthContext';
@@ -27,10 +27,9 @@ export const Login= () => {
   const handleSubmit = () => {
     login(email,password).
     then(()=>navigate("/dashboard")).
-    catch(err => setErrorMessage(err))
-    
-
+    catch(err => setErrorMessage(err)) 
   }
+
   return (
     <>  
         <Typography
@@ -65,7 +64,7 @@ export const Login= () => {
         >
             <Button variant="contained" onClick={handleSubmit}>Login</Button>
         </FormGroup>
-        {errorMessage&&<Typography variant="h4">{errorMessage.message}</Typography>}
+        {errorMessage&&<Alert severity="error" sx={{marginTop:"20px"}}>{errorMessage.message}</Alert>}
         <Typography variant='caption' sx={{marginTop:"20px"}}> New here? <Link to="/">Sign Up</Link></Typography>
 
     </>

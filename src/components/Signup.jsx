@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { Typography, Button, FormGroup, TextField } from '@mui/material'
+import { Typography, Button, FormGroup, TextField, Alert } from '@mui/material'
 import { makeStyles } from '@mui/styles';
 
 import { useAuth } from '../contexts/AuthContext';
@@ -84,7 +84,7 @@ export const Signup = () => {
         >
             <Button variant="contained" onClick={handleSubmit}>Sign Up</Button>
         </FormGroup>
-        {errorMessage&&<Typography variant="h4">{errorMessage.message}</Typography>}
+        {errorMessage&&<Alert severity="error" sx={{marginTop:"20px"}}>{errorMessage.message}</Alert>}
         <Typography variant='caption' sx={{marginTop:"20px"}}> Already have an account? <Link to="/login">Log in</Link></Typography>
         
     </>
