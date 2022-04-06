@@ -20,11 +20,15 @@ export const Login= () => {
   const navigate = useNavigate()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [errorMessage, setErrorMessage] = useState("")
+
   const {login} = useAuth()
 
   const handleSubmit = () => {
-    login(email,password)
-    navigate("/dashboard")
+    login(email,password).
+    then(()=>navigate("/dashboard")).
+    catch(err => setErrorMessage(err))
+    
 
   }
   return (
@@ -61,6 +65,7 @@ export const Login= () => {
         >
             <Button variant="contained" onClick={handleSubmit}>Login</Button>
         </FormGroup>
+        <h4>{errorMessage&&errorMessage.code}</h4>
     </>
   )
 }

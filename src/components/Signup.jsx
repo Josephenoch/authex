@@ -20,6 +20,8 @@ export const Signup = () => {
   const classes = useStyles()
   const navigate = useNavigate();
   const [email, setEmail] = useState("")
+  const [errorMessage, setErrorMessage] = useState("")
+
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
   const {signup} = useAuth()
@@ -28,7 +30,15 @@ export const Signup = () => {
 
     if(password===confirmPassword){
         signup(email,password)
-        navigate("/Dashboard")
+        .then(() => navigate("/Dashboard"))
+        .catch(err => setErrorMessage(err))
+        
+    }
+    else{
+        setErrorMessage({
+            message:"Passwords do not match", 
+            code:"passwords do not match"
+        })
     }
 
   }
@@ -43,6 +53,7 @@ export const Signup = () => {
             className={classes.formGroup}
         >
             <TextField 
+                error={errorMessage.code==="auth/email-already-in-use" ||errorMessage.code==="auth/invalid-email"?true:false}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 label="Email"
@@ -52,6 +63,7 @@ export const Signup = () => {
             className={classes.formGroup}
         >
             <TextField 
+                error={errorMessage.code==="passwords do not match"?true:false}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}    
                 label="Password"
@@ -61,6 +73,7 @@ export const Signup = () => {
             className={classes.formGroup}
         >
             <TextField 
+                error={errorMessage.code==="passwords do not match"?true:false}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}  
                 label="Confirm Pasword"
@@ -71,6 +84,7 @@ export const Signup = () => {
         >
             <Button variant="contained" onClick={handleSubmit}>Sign Up</Button>
         </FormGroup>
+        <h4>{errorMessage&&errorMessage.message}</h4>
     </>
   )
 }
