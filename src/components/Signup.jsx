@@ -5,7 +5,7 @@ import { makeStyles } from '@mui/styles';
 
 import { useAuth } from '../contexts/AuthContext';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 
 
@@ -84,7 +84,9 @@ export const Signup = () => {
         >
             <Button variant="contained" onClick={handleSubmit}>Sign Up</Button>
         </FormGroup>
-        <h4>{errorMessage&&errorMessage.message}</h4>
+        {errorMessage&&<Typography variant="h4">{errorMessage.message}</Typography>}
+        <Typography variant='caption' sx={{marginTop:"20px"}}> Already have an account? <Link to="/login">Log in</Link></Typography>
+        
     </>
   )
 }

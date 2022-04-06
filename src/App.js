@@ -6,6 +6,7 @@ import {Routes, Route} from "react-router-dom"
 import { Login } from "./components/Login";
 import { Dashboard } from "./components/Dashboard";
 import { ProtectedRoute } from "./ProtectedRoute";
+import { PublicRoutes } from "./PublicRoutes";
 
 
 
@@ -35,8 +36,16 @@ function App() {
               }}
             >
               <Routes>
-                  <Route index element={<Signup/>}/>
-                  <Route path="/login"element={<Login/>}/>
+                  <Route index element={
+                    <PublicRoutes>
+                      <Signup/>
+                    </PublicRoutes>
+                  }/>
+                  <Route path="/login"element={
+                    <PublicRoutes>
+                      <Login/>
+                    </PublicRoutes>
+                  }/>
                   <Route path="/dashboard"element={
                     <ProtectedRoute>
                       <Dashboard/>
