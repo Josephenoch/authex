@@ -7,34 +7,29 @@ import { Login } from "./components/Login";
 import { Dashboard } from "./components/Dashboard";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { PublicRoutes } from "./PublicRoutes";
+import {makeStyles, useTheme} from "@mui/styles"
+import { ForgotPassword } from "./components/ForgotPassword";
 
 
+const useStyles = makeStyles({
+  root:{
+    minHeight:"100vh",
+    display:"flex",
+    alignItems:"center",
+    justifyContent:"center",
+    flexDirection:"column"
+
+  },
+})
 
 function App() {
-
-
+  // const theme = useTheme()
+  const classes = useStyles()
   return (
       <AuthProvider>
         <Box
-          sx={{
-            minHeight:"100vh",
-            display:"flex",
-
-          }}
-        >
-          <Box
-              sx={{
-                  minWidth:"400px",
-                  maxWidth:"400px",
-                  margin:"auto",
-                  border:"1px solid grey",
-                  padding:"20px",
-                  borderRadius:"10px",
-                  display:"flex",
-                  flexDirection:"column",
-                  alignItems:"center"
-              }}
-            >
+          className={classes.root}>
+         
               <Routes>
                   <Route index element={
                     <PublicRoutes>
@@ -46,6 +41,11 @@ function App() {
                       <Login/>
                     </PublicRoutes>
                   }/>
+                  <Route path="/forgot-password"element={
+                    <PublicRoutes>
+                      <ForgotPassword/>
+                    </PublicRoutes>
+                  }/>
                   <Route path="/dashboard"element={
                     <ProtectedRoute>
                       <Dashboard/>
@@ -54,7 +54,7 @@ function App() {
 
 
               </Routes>
-          </Box>
+         
 
         </Box>
       </AuthProvider>
